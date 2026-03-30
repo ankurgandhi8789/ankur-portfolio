@@ -65,6 +65,7 @@ const Projects = () => {
             width: 1,
             transform: "translateX(-50%)",
             background:
+            
               "linear-gradient(to bottom, transparent, rgba(212,160,23,0.4), rgba(239,68,68,0.4), transparent)",
           }}
         />
@@ -87,6 +88,7 @@ const Projects = () => {
                   display: "grid",
                   gridTemplateColumns: "1fr 60px 1fr",
                   alignItems: "center",
+                  
                 }}
               >
                 {/* LEFT */}
@@ -101,6 +103,7 @@ const Projects = () => {
                   style={{
                     display: "flex",
                     justifyContent: "center",
+                    
                   }}
                 >
                   <div
