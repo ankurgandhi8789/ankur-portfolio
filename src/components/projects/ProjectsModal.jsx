@@ -2,74 +2,140 @@ import { createPortal } from "react-dom";
 import ModalCard from "./ModalCard";
 import { allProjects } from "./projectsData";
 
-const ProjectsModal = ({ onClose }) => createPortal(
-  <div onClick={onClose} style={{
-    position: "fixed", inset: 0, zIndex: 9999,
-    background: "rgba(0,0,0,0.85)",
-    backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
-    display: "flex", alignItems: "center", justifyContent: "center",
-    padding: "24px", animation: "fadeIn 0.2s ease",
-  }}>
-    <div onClick={e => e.stopPropagation()} style={{
-      background: "#0f0f1e",
-      border: "1px solid rgba(167,139,250,0.3)",
-      borderRadius: 20,
-      width: "100%",
-      maxWidth: 1000,
-      height: "90vh",
-      display: "flex",
-      flexDirection: "column",
-      animation: "slideUp 0.3s ease",
-      overflow: "hidden",
-    }}>
-
-      {/* Header */}
-      <div style={{
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "18px 28px", borderBottom: "1px solid var(--border)",
-        flexShrink: 0, background: "#0f0f1e",
-      }}>
-        <div>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--text)" }}>All Projects</h3>
-          <p style={{ fontSize: 12, color: "var(--muted)", marginTop: 3 }}>{allProjects.length} projects total</p>
-        </div>
-        <button onClick={onClose} style={{
-          background: "rgba(255,255,255,0.06)", border: "1px solid var(--border)",
-          borderRadius: "50%", width: 36, height: 36, cursor: "pointer",
-          color: "var(--text)", fontSize: 18, display: "flex", alignItems: "center",
-          justifyContent: "center", transition: "background 0.2s", fontFamily: "var(--font)",
+const ProjectsModal = ({ onClose }) =>
+  createPortal(
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        background: "rgba(0,0,0,0.75)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "24px",
+        animation: "fadeIn 0.2s ease",
+      }}
+    >
+      {/* MODAL */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#111111",
+          border: "1px solid rgba(255,255,255,0.06)",
+          borderRadius: 16,
+          width: "100%",
+          maxWidth: 1000,
+          height: "90vh",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+          animation: "slideUp 0.3s ease",
         }}
-          onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
-          onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.06)"}>✕</button>
-      </div>
+      >
+        {/* HEADER */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "18px 26px",
+            borderBottom: "1px solid rgba(255,255,255,0.05)",
+            flexShrink: 0,
+          }}
+        >
+          <div>
+            <h3
+              style={{
+                fontSize: 18,
+                fontWeight: 700,
+                color: "#E5E5E5",
+              }}
+            >
+              All <span style={{ color: "#D4A017" }}>Projects</span>
+            </h3>
 
-      {/* Scrollable area */}
-      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", padding: "24px 28px" }}>
-        <div className="modal-grid">
-          {allProjects.map(p => <ModalCard key={p.title} p={p} />)}
+           
+          </div>
+
+          {/* CLOSE BUTTON */}
+          <button
+            onClick={onClose}
+            style={{
+              background: "#0F0F0F",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: "50%",
+              width: 34,
+              height: 34,
+              cursor: "pointer",
+              color: "#E5E5E5",
+              fontSize: 16,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#1A1A1A";
+              e.currentTarget.style.borderColor = "rgba(212,160,23,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "#0F0F0F";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+            }}
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* CONTENT */}
+        <div
+          style={{
+            flex: 1,
+            overflowY: "auto",
+            padding: "22px 26px",
+          }}
+        >
+          <div className="modal-grid">
+            {allProjects.map((p) => (
+              <ModalCard key={p.title} p={p} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
 
-    <style>{`
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-      @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
 
-      .modal-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        align-items: start;
-      }
-      @media (max-width: 768px) {
-        .modal-grid { grid-template-columns: repeat(2, 1fr); }
-      }
-      @media (max-width: 480px) {
-        .modal-grid { grid-template-columns: 1fr; }
-      }
-    `}</style>
-  </div>,
-  document.body
-);
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+        }
+
+        @media (max-width: 768px) {
+          .modal-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .modal-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+    </div>,
+    document.body
+  );
 
 export default ProjectsModal;

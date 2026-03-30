@@ -12,6 +12,7 @@ function App() {
 
   return (
     <>
+    
       <SplashScreen onDone={() => setSplashDone(true)} />
 
       {/* Background gradient orbs */}

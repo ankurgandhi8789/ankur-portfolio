@@ -1,32 +1,208 @@
 const MobileTimeline = ({ projects }) => (
-  <div className="mobile-timeline" style={{ display: "none", flexDirection: "column", gap: 32, position: "relative", paddingLeft: 32 }}>
-    <div style={{ position: "absolute", left: 10, top: 0, bottom: 0, width: 2, background: "linear-gradient(to bottom, transparent, var(--purple), var(--blue), transparent)", opacity: 0.5 }} />
-    {projects.map(p => (
-      <div key={p.title} style={{ display: "flex", alignItems: "flex-start", position: "relative" }}>
-        <div style={{ position: "absolute", left: -26, top: 20, width: 12, height: 12, borderRadius: "50%", background: p.color, boxShadow: `0 0 10px ${p.color}`, border: "2px solid var(--bg)", zIndex: 1 }} />
-        <div style={{ flex: 1, background: "rgba(255,255,255,0.05)", border: `1px solid ${p.color}44`, borderRadius: 16, padding: 20, backdropFilter: "blur(12px)", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, ${p.color}, transparent)`, borderRadius: "16px 16px 0 0" }} />
-          <div style={{ marginBottom: 8 }}>
-            <span style={{ fontSize: 11, fontWeight: 600, color: p.color, background: `${p.color}18`, padding: "3px 10px", borderRadius: 50 }}>{p.tag}</span>
-          </div>
-          <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>{p.title}</h3>
-          <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.7, marginBottom: 12 }}>{p.desc}</p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
-            {p.stack.map(s => (<span key={s} style={{ fontSize: 11, color: "var(--muted)", background: "rgba(255,255,255,0.06)", padding: "3px 10px", borderRadius: 50, border: "1px solid var(--border)" }}>{s}</span>))}
-          </div>
-          <div style={{ display: "flex", gap: 10 }}>
-            <a href={p.github} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, background: "rgba(255,255,255,0.08)", border: "1px solid var(--border)", color: "var(--text)", textDecoration: "none" }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.165c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
-              GitHub
-            </a>
-            <a href={p.demo} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, background: `${p.color}22`, border: `1px solid ${p.color}55`, color: p.color, textDecoration: "none" }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Demo
-            </a>
+  <div
+    className="mobile-timeline"
+    style={{
+      display: "none",
+      flexDirection: "column",
+      gap: 36,
+      position: "relative",
+      paddingLeft: 28,
+    }}
+  >
+    {/* 🔥 Timeline Line */}
+    <div
+      style={{
+        position: "absolute",
+        left: 8,
+        top: 0,
+        bottom: 0,
+        width: 1,
+        background:
+          "linear-gradient(to bottom, transparent, rgba(212,160,23,0.4), rgba(239,68,68,0.4), transparent)",
+      }}
+    />
+
+    {projects.map((p, i) => {
+      const isMustard = p.color === "#D4A017";
+
+      return (
+        <div
+          key={p.title}
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            position: "relative",
+          }}
+        >
+          {/* 🔘 DOT */}
+          <div
+            style={{
+              position: "absolute",
+              left: -20,
+              top: 18,
+              width: 10,
+              height: 10,
+              borderRadius: "50%",
+              background: isMustard ? "#D4A017" : "#EF4444",
+              boxShadow: isMustard
+                ? "0 0 10px rgba(212,160,23,0.6)"
+                : "0 0 10px rgba(239,68,68,0.6)",
+              border: "2px solid #0F0F0F",
+            }}
+          />
+
+          {/* 📦 CARD */}
+          <div
+            style={{
+              flex: 1,
+              background: "#111111",
+              border: "1px solid rgba(255,255,255,0.05)",
+              borderRadius: 12,
+              padding: 18,
+              position: "relative",
+              overflow: "hidden",
+              transition: "all 0.25s ease",
+            }}
+          >
+            {/* TOP ACCENT */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 2,
+                background: isMustard
+                  ? "linear-gradient(90deg, #D4A017, transparent)"
+                  : "linear-gradient(90deg, #EF4444, transparent)",
+              }}
+            />
+
+            {/* TAG */}
+            <div style={{ marginBottom: 8 }}>
+              <span
+                style={{
+                  fontSize: 10,
+                  fontWeight: 600,
+                  letterSpacing: "1px",
+                  textTransform: "uppercase",
+                  color: isMustard ? "#D4A017" : "#EF4444",
+                  background: isMustard
+                    ? "rgba(212,160,23,0.08)"
+                    : "rgba(239,68,68,0.08)",
+                  border: isMustard
+                    ? "1px solid rgba(212,160,23,0.2)"
+                    : "1px solid rgba(239,68,68,0.2)",
+                  padding: "4px 10px",
+                  borderRadius: 20,
+                }}
+              >
+                {p.tag}
+              </span>
+            </div>
+
+            {/* TITLE */}
+            <h3
+              style={{
+                fontSize: 15,
+                fontWeight: 700,
+                color: "#E5E5E5",
+                marginBottom: 6,
+              }}
+            >
+              {p.title}
+            </h3>
+
+            {/* DESC */}
+            <p
+              style={{
+                color: "#9CA3AF",
+                fontSize: 13,
+                lineHeight: 1.6,
+                marginBottom: 12,
+              }}
+            >
+              {p.desc}
+            </p>
+
+            {/* STACK */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 6,
+                marginBottom: 14,
+              }}
+            >
+              {p.stack.map((s) => (
+                <span
+                  key={s}
+                  style={{
+                    fontSize: 10,
+                    color: "#9CA3AF",
+                    background: "#0F0F0F",
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    padding: "4px 10px",
+                    borderRadius: 20,
+                  }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+
+            {/* BUTTONS */}
+            <div style={{ display: "flex", gap: 10 }}>
+              {/* GitHub */}
+              <a
+                href={p.github}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  flex: 1,
+                  textAlign: "center",
+                  padding: "7px 0",
+                  borderRadius: 6,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  background: "#0F0F0F",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  color: "#E5E5E5",
+                  textDecoration: "none",
+                }}
+              >
+                GitHub
+              </a>
+
+              {/* Live */}
+              <a
+                href={p.demo}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  flex: 1,
+                  textAlign: "center",
+                  padding: "7px 0",
+                  borderRadius: 6,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  background: isMustard
+                    ? "rgba(212,160,23,0.12)"
+                    : "rgba(239,68,68,0.12)",
+                  border: isMustard
+                    ? "1px solid rgba(212,160,23,0.3)"
+                    : "1px solid rgba(239,68,68,0.3)",
+                  color: isMustard ? "#D4A017" : "#EF4444",
+                  textDecoration: "none",
+                }}
+              >
+                Live
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    ))}
+      );
+    })}
   </div>
 );
 

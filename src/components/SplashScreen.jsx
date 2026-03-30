@@ -1,115 +1,158 @@
 import { useEffect, useState } from "react";
 
 const SplashScreen = ({ onDone }) => {
-  const [phase, setPhase] = useState("show"); // show → open → done
+  const [phase, setPhase] = useState("show");
 
   useEffect(() => {
-    // After 2s show content, then open doors at 2.8s, done at 4s
-    const t1 = setTimeout(() => setPhase("open"), 2800);
-    const t2 = setTimeout(() => onDone(), 4200);
+    const t1 = setTimeout(() => setPhase("open"), 2600);
+    const t2 = setTimeout(() => onDone(), 3800);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [onDone]);
 
-  if (phase === "done") return null;
-
-  const panelBase = {
+  const doorBase = {
     position: "fixed",
     left: 0,
     right: 0,
     height: "50vh",
-    background: "#0a0a14",
+    background: "#111111",
     zIndex: 999,
-    transition: "transform 1.2s cubic-bezier(0.76, 0, 0.24, 1)",
+    transition: "transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
   };
 
+  const gridBg = {
+    position: "absolute",
+    inset: 0,
+    backgroundImage:
+      "linear-gradient(rgba(196,160,80,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(196,160,80,0.05) 1px, transparent 1px)",
+    backgroundSize: "40px 40px",
+    pointerEvents: "none",
+  };
+
+  const corner = (pos) => {
+    const base = {
+      position: "absolute", width: 56, height: 56,
+      borderColor: "rgba(196,160,80,0.3)", borderStyle: "solid",
+    };
+    const sides = {
+      tl: { top: 16, left: 16,  borderWidth: "1px 0 0 1px" },
+      tr: { top: 16, right: 16, borderWidth: "1px 1px 0 0" },
+      bl: { bottom: 16, left: 16,  borderWidth: "0 0 1px 1px" },
+      br: { bottom: 16, right: 16, borderWidth: "0 1px 1px 0" },
+    };
+    return { ...base, ...sides[pos] };
+  };
+
+  const tagStyle = (variant) => ({
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: 11,
+    letterSpacing: "1px",
+    textTransform: "uppercase",
+    padding: "5px 14px",
+    borderRadius: 2,
+    ...(variant === "mustard"
+      ? { color: "#c4a050", border: "1px solid rgba(196,160,80,0.22)", background: "rgba(196,160,80,0.07)" }
+      : { color: "#b05040", border: "1px solid rgba(176,80,64,0.22)",  background: "rgba(176,80,64,0.07)" }),
+  });
+
   return (
     <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
+        @keyframes riseUp   { from { opacity:0; transform:translateY(16px);  } to { opacity:1; transform:translateY(0); } }
+        @keyframes riseDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes softPulse { 0%,100% { opacity:0.35; } 50% { opacity:0.9; } }
+      `}</style>
+
       {/* Top door */}
       <div style={{
-        ...panelBase,
+        ...doorBase,
         top: 0,
-        transform: phase === "open" ? "translateY(-100%)" : "translateY(0)",
-        borderBottom: "1px solid rgba(167,139,250,0.3)",
         alignItems: "flex-end",
-        paddingBottom: 40,
+        paddingBottom: 32,
+        borderBottom: "1px solid rgba(196,160,80,0.2)",
+        transform: phase === "open" ? "translateY(-100%)" : "translateY(0)",
       }}>
-        {/* Top orb */}
-        <div style={{ position: "absolute", width: 400, height: 400, borderRadius: "50%", background: "#a78bfa", filter: "blur(100px)", opacity: 0.12, top: -100, left: "30%" }} />
+        <div style={gridBg} />
+        <div style={corner("tl")} />
+        <div style={corner("tr")} />
 
-        <div style={{ textAlign: "center", animation: phase === "show" ? "fadeUp 0.8s ease forwards" : "none" }}>
-          <p style={{ fontSize: 13, letterSpacing: 6, color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>
-            Welcome to my portfolio
+        <div style={{ textAlign: "center", position: "relative", zIndex: 2 }}>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 11, letterSpacing: "4px", color: "#7a6e5a",
+            textTransform: "uppercase", marginBottom: 10,
+            animation: "riseUp 0.7s ease 0.15s forwards", opacity: 0,
+          }}>
+            Full-Stack Developer
           </p>
           <h1 style={{
-            fontSize: "clamp(36px, 7vw, 80px)",
-            fontWeight: 800,
-            background: "linear-gradient(135deg, #a78bfa, #60a5fa)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            lineHeight: 1.1,
+            fontFamily: "'Syne', sans-serif", fontWeight: 800,
+            fontSize: "clamp(38px, 8vw, 72px)",
+            letterSpacing: "-1px", lineHeight: 1, margin: 0,
+            color: "#ede8dc",
+            animation: "riseUp 0.7s ease 0.3s forwards", opacity: 0,
           }}>
-            Ankur Gandhi
+            Ankur{" "}
+            <span style={{ color: "#c4a050" }}>Gandhi</span>
           </h1>
         </div>
       </div>
 
       {/* Bottom door */}
       <div style={{
-        ...panelBase,
+        ...doorBase,
         bottom: 0,
-        transform: phase === "open" ? "translateY(100%)" : "translateY(0)",
-        borderTop: "1px solid rgba(167,139,250,0.3)",
         alignItems: "flex-start",
-        paddingTop: 40,
+        paddingTop: 32,
+        borderTop: "1px solid rgba(196,160,80,0.2)",
+        transform: phase === "open" ? "translateY(100%)" : "translateY(0)",
       }}>
-        {/* Bottom orb */}
-        <div style={{ position: "absolute", width: 400, height: 400, borderRadius: "50%", background: "#60a5fa", filter: "blur(100px)", opacity: 0.1, bottom: -100, right: "20%" }} />
+        <div style={gridBg} />
+        <div style={corner("bl")} />
+        <div style={corner("br")} />
 
-        <div style={{ textAlign: "center", animation: phase === "show" ? "fadeDown 0.8s ease 0.3s forwards" : "none", opacity: 0 }}>
-          <p style={{ fontSize: "clamp(14px, 2vw, 18px)", color: "var(--muted)", marginBottom: 16, letterSpacing: 1 }}>
-            Full-Stack Developer &nbsp;·&nbsp; React Specialist &nbsp;·&nbsp; UI/UX Enthusiast
-          </p>
-          <div style={{ display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
-            {["React", "Node.js", "TypeScript", "MongoDB"].map(t => (
-              <span key={t} style={{
-                fontSize: 12, color: "#a78bfa",
-                background: "rgba(167,139,250,0.1)",
-                border: "1px solid rgba(167,139,250,0.25)",
-                padding: "4px 14px", borderRadius: 50,
-              }}>{t}</span>
+        <div style={{ textAlign: "center", position: "relative", zIndex: 2 }}>
+          <div style={{
+            display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap",
+            animation: "riseDown 0.7s ease 0.35s forwards", opacity: 0,
+          }}>
+            {[
+              { label: "React",      v: "mustard" },
+              { label: "Node.js",    v: "red"     },
+              { label: "TypeScript", v: "mustard" },
+              { label: "MongoDB",    v: "red"     },
+            ].map(({ label, v }) => (
+              <span key={label} style={tagStyle(v)}>{label}</span>
             ))}
           </div>
+
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 10, letterSpacing: "3px", color: "#5a5040",
+            textTransform: "uppercase", marginTop: 26,
+            animation: "riseDown 0.7s ease 0.55s forwards, softPulse 2.4s ease 1.2s infinite",
+            opacity: 0,
+          }}>
+            Loading
+          </p>
         </div>
       </div>
 
-      {/* Center line (the door gap) */}
+      {/* Center divider */}
       <div style={{
         position: "fixed",
-        top: "50%",
-        left: 0,
-        right: 0,
-        height: 1,
-        background: "linear-gradient(90deg, transparent, #a78bfa, #60a5fa, transparent)",
+        top: "50%", left: 0, right: 0, height: 1,
+        background: "linear-gradient(90deg, transparent, #c4a050 35%, #b05040 65%, transparent)",
         zIndex: 1000,
         transform: "translateY(-50%)",
         opacity: phase === "open" ? 0 : 1,
         transition: "opacity 0.4s ease",
+        pointerEvents: "none",
       }} />
-
-      <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeDown {
-          from { opacity: 0; transform: translateY(-20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </>
   );
 };
