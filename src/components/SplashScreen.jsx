@@ -109,7 +109,7 @@ const SplashScreen = ({ onDone }) => {
         <div style={corner("tl")} />
         <div style={corner("tr")} />
 
-        {/* <div
+        <div
           style={{
             textAlign: "center",
             position: "relative",
@@ -163,8 +163,8 @@ const SplashScreen = ({ onDone }) => {
           >
             Ankur <span style={{ color: "#c4a050" }}>Gandhi</span>
           </h1>
-        </div> */}
-        <div style={{ textAlign: "center", position: "relative", zIndex: 2 }}>
+        </div>
+        {/* <div style={{ textAlign: "center", position: "relative", zIndex: 2 }}>
            <p style={{
              fontFamily: "'DM Sans', sans-serif",
             fontSize: 11, letterSpacing: "4px", color: "#7a6e5a",
@@ -184,7 +184,7 @@ const SplashScreen = ({ onDone }) => {
             Ankur{" "}
             <span style={{ color: "#c4a050" }}>Gandhi</span>
           </h1>
-        </div>
+        </div> */}
 
       </div>
 
