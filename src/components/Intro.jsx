@@ -158,13 +158,13 @@ const Intro = () => {
       <a
         href="#projects"
         style={{
-          marginTop: 30,              // spacing from content above
+          marginTop: 40,              // spacing from content above
           textDecoration: "none",
           color: "#9CA3AF",
           fontSize: 11,
           letterSpacing: 2,
           textTransform: "uppercase",
-          paddingBottom: 8,           // small breathable gap from section bottom
+          paddingBottom: 14,           // small breathable gap from section bottom
         }}
       >
         ↓ Scroll
