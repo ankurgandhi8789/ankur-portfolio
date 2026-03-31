@@ -6,24 +6,21 @@ const SplashScreen = ({ onDone }) => {
   useEffect(() => {
     const t1 = setTimeout(() => setPhase("open"), 2600);
     const t2 = setTimeout(() => onDone(), 3800);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [onDone]);
 
   const doorBase = {
     position: "fixed",
     left: 0,
     right: 0,
-    height: "50vh",
+    height: "50%",           // % instead of vh — more reliable on mobile browsers
     background: "#111111",
     zIndex: 999,
     transition: "transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden",
+    overflow: "hidden",      // prevents content bleed on small screens
   };
 
   const gridBg = {
@@ -37,16 +34,13 @@ const SplashScreen = ({ onDone }) => {
 
   const corner = (pos) => {
     const base = {
-      position: "absolute",
-      width: 50,
-      height: 50,
-      borderColor: "rgba(196,160,80,0.3)",
-      borderStyle: "solid",
+      position: "absolute", width: 40, height: 40,  // smaller corners on mobile
+      borderColor: "rgba(196,160,80,0.3)", borderStyle: "solid",
     };
     const sides = {
-      tl: { top: 12, left: 12, borderWidth: "1px 0 0 1px" },
+      tl: { top: 12, left: 12,  borderWidth: "1px 0 0 1px" },
       tr: { top: 12, right: 12, borderWidth: "1px 1px 0 0" },
-      bl: { bottom: 12, left: 12, borderWidth: "0 0 1px 1px" },
+      bl: { bottom: 12, left: 12,  borderWidth: "0 0 1px 1px" },
       br: { bottom: 12, right: 12, borderWidth: "0 1px 1px 0" },
     };
     return { ...base, ...sides[pos] };
@@ -54,245 +48,159 @@ const SplashScreen = ({ onDone }) => {
 
   const tagStyle = (variant) => ({
     fontFamily: "'DM Sans', sans-serif",
-    fontSize: "clamp(9px, 2.5vw, 11px)",
-    letterSpacing: "1px",
+    fontSize: "clamp(9px, 2.2vw, 11px)",  // fluid font size for tags
+    letterSpacing: "0.8px",
     textTransform: "uppercase",
-    padding: "5px 12px",
+    padding: "4px 10px",
     borderRadius: 2,
+    whiteSpace: "nowrap",                  // prevent tag text wrapping mid-word
     ...(variant === "mustard"
-      ? {
-          color: "#c4a050",
-          border: "1px solid rgba(196,160,80,0.22)",
-          background: "rgba(196,160,80,0.07)",
-        }
-      : {
-          color: "#b05040",
-          border: "1px solid rgba(176,80,64,0.22)",
-          background: "rgba(176,80,64,0.07)",
-        }),
+      ? { color: "#c4a050", border: "1px solid rgba(196,160,80,0.22)", background: "rgba(196,160,80,0.07)" }
+      : { color: "#b05040", border: "1px solid rgba(176,80,64,0.22)",  background: "rgba(176,80,64,0.07)" }),
   });
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
+        @keyframes riseUp   { from { opacity:0; transform:translateY(16px);  } to { opacity:1; transform:translateY(0); } }
+        @keyframes riseDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes softPulse { 0%,100% { opacity:0.35; } 50% { opacity:0.9; } }
 
-        @keyframes riseUp {
-          from { opacity:0; transform:translateY(16px); }
-          to { opacity:1; transform:translateY(0); }
-        }
-
-        @keyframes riseDown {
-          from { opacity:0; transform:translateY(-14px); }
-          to { opacity:1; transform:translateY(0); }
-        }
-
-        @keyframes softPulse {
-          0%,100% { opacity:0.35; }
-          50% { opacity:0.9; }
-        }
+        /* Prevent body scroll while splash is open */
+        body { overflow: hidden; }
       `}</style>
 
-      {/* TOP DOOR */}
-      <div
-        style={{
-          ...doorBase,
-          top: 0,
-          alignItems: "flex-end",
-          paddingBottom: "clamp(16px, 5vw, 32px)",
-          borderBottom: "1px solid rgba(196,160,80,0.2)",
-          transform:
-            phase === "open" ? "translateY(-100%)" : "translateY(0)",
-        }}
-      >
+      {/* Top door */}
+      <div style={{
+        ...doorBase,
+        top: 0,
+        alignItems: "flex-end",
+        paddingBottom: "clamp(16px, 4vw, 32px)",
+        borderBottom: "1px solid rgba(196,160,80,0.2)",
+        transform: phase === "open" ? "translateY(-100%)" : "translateY(0)",
+      }}>
         <div style={gridBg} />
         <div style={corner("tl")} />
         <div style={corner("tr")} />
 
-        {/* <div
-          style={{
-            textAlign: "center",
-            position: "relative",
-            zIndex: 2,
-            padding: "0 16px",
-            maxWidth: 500,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11,
-              letterSpacing: "4px",
-              color: "#7a6e5a",
-              textTransform: "uppercase",
-              marginBottom: 8,
-              animation: "riseUp 0.7s ease 0.15s forwards",
-              opacity: 0,
-            }}
-          >
-            Full-Stack Developer
-          </p>
-
-          
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "clamp(11px, 2.5vw, 13px)",
-              color: "#8a7f6a",
-              marginBottom: 6,
-              animation: "riseUp 0.7s ease 0.25s forwards",
-              opacity: 0,
-            }}
-          >
-            Crafting scalable and modern web experiences
-          </p>
-
-          <h1
-            style={{
-              fontFamily: "'Syne', sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(28px, 8vw, 64px)",
-              letterSpacing: "-1px",
-              lineHeight: 1.1,
-              margin: 0,
-              color: "#ede8dc",
-              wordBreak: "break-word",
-              animation: "riseUp 0.7s ease 0.3s forwards",
-              opacity: 0,
-            }}
-          >
-            Ankur <span style={{ color: "#c4a050" }}>Gandhi</span>
-          </h1>
-        </div> */}
-        <div style={{ textAlign: "center", position: "relative", zIndex: 2 }}>
-           <p style={{
-             fontFamily: "'DM Sans', sans-serif",
-            fontSize: 11, letterSpacing: "4px", color: "#7a6e5a",
-            textTransform: "uppercase", marginBottom: 10,
-            animation: "riseUp 0.7s ease 0.15s forwards", opacity: 0,
+        <div style={{
+          textAlign: "center",
+          position: "relative",
+          zIndex: 2,
+          padding: "0 16px",          // horizontal padding so text doesn't touch edges
+          width: "100%",
+          boxSizing: "border-box",
+        }}>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "clamp(9px, 2.5vw, 11px)",
+            letterSpacing: "clamp(2px, 0.8vw, 4px)",
+            color: "#7a6e5a",
+            textTransform: "uppercase",
+            marginBottom: 10,
+            animation: "riseUp 0.7s ease 0.15s forwards",
+            opacity: 0,
           }}>
             Full-Stack Developer
           </p>
-          
           <h1 style={{
-            fontFamily: "'Syne', sans-serif", fontWeight: 800,
-            fontSize: "clamp(38px, 8vw, 72px)",
-            letterSpacing: "-1px", lineHeight: 1, margin: 0,
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(32px, 10vw, 72px)",   // tighter min so it fits on 320px screens
+            letterSpacing: "-1px",
+            lineHeight: 1,
+            margin: 0,
             color: "#ede8dc",
-            animation: "riseUp 0.7s ease 0.3s forwards", opacity: 0,
+            animation: "riseUp 0.7s ease 0.3s forwards",
+            opacity: 0,
+            wordBreak: "keep-all",     // prevents "Ankur" from breaking
           }}>
             Ankur{" "}
             <span style={{ color: "#c4a050" }}>Gandhi</span>
           </h1>
         </div>
-
       </div>
 
-      {/* BOTTOM DOOR */}
-      <div
-        style={{
-          ...doorBase,
-          bottom: 0,
-          alignItems: "flex-start",
-          paddingTop: "clamp(16px, 5vw, 32px)",
-          borderTop: "1px solid rgba(196,160,80,0.2)",
-          transform:
-            phase === "open" ? "translateY(100%)" : "translateY(0)",
-        }}
-      >
+      {/* Bottom door */}
+      <div style={{
+        ...doorBase,
+        bottom: 0,
+        alignItems: "flex-start",
+        paddingTop: "clamp(16px, 4vw, 32px)",
+        borderTop: "1px solid rgba(196,160,80,0.2)",
+        transform: phase === "open" ? "translateY(100%)" : "translateY(0)",
+      }}>
         <div style={gridBg} />
         <div style={corner("bl")} />
         <div style={corner("br")} />
 
-        <div
-          style={{
-            textAlign: "center",
-            position: "relative",
-            zIndex: 2,
-            padding: "0 16px",
-            maxWidth: 500,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: 8,
-              justifyContent: "center",
-              flexWrap: "wrap",
-              padding: "0 12px",
-              animation: "riseDown 0.7s ease 0.35s forwards",
-              opacity: 0,
-            }}
-          >
+        <div style={{
+          textAlign: "center",
+          position: "relative",
+          zIndex: 2,
+          padding: "0 16px",
+          width: "100%",
+          boxSizing: "border-box",
+        }}>
+          <div style={{
+            display: "flex",
+            gap: "clamp(6px, 2vw, 10px)",
+            justifyContent: "center",
+            flexWrap: "wrap",           // wrap to 2 rows on very narrow screens
+            animation: "riseDown 0.7s ease 0.35s forwards",
+            opacity: 0,
+          }}>
             {[
-              { label: "React", v: "mustard" },
-              { label: "Node.js", v: "red" },
+              { label: "React",      v: "mustard" },
+              { label: "Node.js",    v: "red"     },
               { label: "TypeScript", v: "mustard" },
-              { label: "MongoDB", v: "red" },
+              { label: "MongoDB",    v: "red"     },
             ].map(({ label, v }) => (
-              <span key={label} style={tagStyle(v)}>
-                {label}
-              </span>
+              <span key={label} style={tagStyle(v)}>{label}</span>
             ))}
           </div>
 
-          {/* NEW LINE */}
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "clamp(10px, 2.5vw, 12px)",
-              color: "#7a6e5a",
-              marginTop: 18,
-              lineHeight: 1.5,
-              maxWidth: 320,
-              marginInline: "auto",
-              animation: "riseDown 0.7s ease 0.6s forwards",
-              opacity: 0,
-            }}
-          >
-            Focused on clean design, performance, and impactful user experiences.
-          </p>
-
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "clamp(9px, 2.5vw, 11px)",
-              letterSpacing: "3px",
-              color: "#5a5040",
-              textTransform: "uppercase",
-              marginTop: 18,
-              animation:
-                "riseDown 0.7s ease 0.7s forwards, softPulse 2.4s ease 1.2s infinite",
-              opacity: 0,
-            }}
-          >
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "clamp(9px, 2.2vw, 10px)",
+            letterSpacing: "clamp(1.5px, 0.7vw, 3px)",
+            color: "#5a5040",
+            textTransform: "uppercase",
+            marginTop: "clamp(14px, 3.5vw, 26px)",
+            animation: "riseDown 0.7s ease 0.55s forwards, softPulse 2.4s ease 1.2s infinite",
+            opacity: 0,
+          }}>
             Loading
           </p>
         </div>
       </div>
 
-      {/* CENTER LINE */}
-      <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: 0,
-          right: 0,
-          height: 1,
-          background:
-            "linear-gradient(90deg, transparent, #c4a050 35%, #b05040 65%, transparent)",
-          zIndex: 1000,
-          transform: "translateY(-50%)",
-          opacity: phase === "open" ? 0 : 1,
-          transition: "opacity 0.4s ease",
-          pointerEvents: "none",
-        }}
-      />
+      {/* Center divider line */}
+      <div style={{
+        position: "fixed",
+        top: "50%",
+        left: 0,
+        right: 0,
+        height: 1,
+        background: "linear-gradient(90deg, transparent, #c4a050 35%, #b05040 65%, transparent)",
+        zIndex: 1000,
+        transform: "translateY(-50%)",
+        opacity: phase === "open" ? 0 : 1,
+        transition: "opacity 0.4s ease",
+        pointerEvents: "none",
+      }} />
     </>
   );
 };
 
 export default SplashScreen;
+
+
+
+
+
+
 
 
 
