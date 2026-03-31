@@ -4,9 +4,22 @@ const SplashScreen = ({ onDone }) => {
   const [phase, setPhase] = useState("show");
 
   useEffect(() => {
+    // Lock scroll while splash is visible
+    document.body.style.overflow = "hidden";
+
     const t1 = setTimeout(() => setPhase("open"), 2600);
-    const t2 = setTimeout(() => onDone(), 3800);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    const t2 = setTimeout(() => {
+      // Restore scroll BEFORE calling onDone so the next page can scroll immediately
+      document.body.style.overflow = "";
+      onDone();
+    }, 3800);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      // Safety: always restore scroll if component unmounts early
+      document.body.style.overflow = "";
+    };
   }, [onDone]);
 
   const doorBase = {
@@ -66,9 +79,6 @@ const SplashScreen = ({ onDone }) => {
         @keyframes riseUp   { from { opacity:0; transform:translateY(16px);  } to { opacity:1; transform:translateY(0); } }
         @keyframes riseDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
         @keyframes softPulse { 0%,100% { opacity:0.35; } 50% { opacity:0.9; } }
-
-        /* Prevent body scroll while splash is open */
-        body { overflow: hidden; }
       `}</style>
 
       {/* Top door */}
@@ -195,7 +205,6 @@ const SplashScreen = ({ onDone }) => {
 };
 
 export default SplashScreen;
-
 
 
 
