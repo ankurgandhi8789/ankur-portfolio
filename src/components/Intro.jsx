@@ -158,7 +158,7 @@ const Intro = () => {
       <a
         href="#projects"
         style={{
-          marginTop: 40,              // spacing from content above
+          marginTop: 30,              // spacing from content above
           textDecoration: "none",
           color: "#9CA3AF",
           fontSize: 11,
