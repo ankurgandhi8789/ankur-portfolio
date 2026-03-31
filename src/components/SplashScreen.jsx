@@ -4,23 +4,12 @@ const SplashScreen = ({ onDone }) => {
   const [phase, setPhase] = useState("show");
 
   useEffect(() => {
-    // Lock scroll while splash is visible
-    document.body.style.overflow = "hidden";
-
-    const t1 = setTimeout(() => setPhase("open"), 2600);
-    const t2 = setTimeout(() => {
-      // Restore scroll BEFORE calling onDone so the next page can scroll immediately
-      document.body.style.overflow = "";
-      onDone();
-    }, 3800);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      // Safety: always restore scroll if component unmounts early
-      document.body.style.overflow = "";
-    };
+  const t1 = setTimeout(() => setPhase("open"), 2600);
+  const t2 = setTimeout(() => onDone(), 3800);
+  return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [onDone]);
+
+   
 
   const doorBase = {
     position: "fixed",
