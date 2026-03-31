@@ -149,3 +149,11 @@ section { position: relative; z-index: 1; }
   text-transform: uppercase;
   padding: 5px 14px; border-radius: 2px;
 }
+
+@media (max-width: 768px) {
+  .scroll-indicator {
+    font-size: 10px;
+    bottom: 15px;
+    letter-spacing: 1px;
+  }
+}

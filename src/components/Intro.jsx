@@ -155,8 +155,10 @@ const Intro = () => {
       </div>
 
       {/* Scroll Indicator — sits in normal flow at the bottom, no absolute positioning */}
+      
       <a
         href="#projects"
+        className="scroll-indicator"
         style={{
           marginTop: 40,              // spacing from content above
           textDecoration: "none",
@@ -164,7 +166,7 @@ const Intro = () => {
           fontSize: 11,
           letterSpacing: 2,
           textTransform: "uppercase",
-          paddingBottom: 14,           // small breathable gap from section bottom
+          paddingBottom: 8,           // small breathable gap from section bottom
         }}
       >
         ↓ Scroll
@@ -174,3 +176,4 @@ const Intro = () => {
 };
 
 export default Intro;
+
