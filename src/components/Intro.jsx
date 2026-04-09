@@ -148,7 +148,7 @@ const Intro = () => {
           >
             <span className="tag-mustard">React</span>
             <span className="tag-red">Node</span>
-            <span className="tag-mustard">TypeScript</span>
+            <span className="tag-mustard">JavaScript</span>
             <span className="tag-red">MongoDB</span>
           </div>
         </div>

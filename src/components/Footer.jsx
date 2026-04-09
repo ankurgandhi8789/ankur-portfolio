@@ -128,7 +128,7 @@ const Footer = () => (
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <p style={{ fontSize: 13, color: "#E5E5E5" }}>ankur@gandhi.dev</p>
+              <p style={{ fontSize: 13, color: "#E5E5E5" }}>ankurgandhi8789@gmail.com</p>
               <p style={{ fontSize: 13, color: "#9CA3AF" }}>India</p>
             </div>
           </div>

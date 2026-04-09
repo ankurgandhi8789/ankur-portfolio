@@ -153,7 +153,7 @@ const SplashScreen = ({ onDone }) => {
             {[
               { label: "React",      v: "mustard" },
               { label: "Node.js",    v: "red"     },
-              { label: "TypeScript", v: "mustard" },
+              { label: "JavaScript", v: "mustard" },
               { label: "MongoDB",    v: "red"     },
             ].map(({ label, v }) => (
               <span key={label} style={tagStyle(v)}>{label}</span>
@@ -327,7 +327,7 @@ export default SplashScreen;
 //             {[
 //               { label: "React",      v: "mustard" },
 //               { label: "Node.js",    v: "red"     },
-//               { label: "TypeScript", v: "mustard" },
+//               { label: "JavaScript", v: "mustard" },
 //               { label: "MongoDB",    v: "red"     },
 //             ].map(({ label, v }) => (
 //               <span key={label} style={tagStyle(v)}>{label}</span>

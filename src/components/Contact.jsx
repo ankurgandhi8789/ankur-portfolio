@@ -128,10 +128,10 @@ const Contact = () => {
         {/* LEFT — SIMPLE INFO */}
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           {[
-            { label: "Email", value: "ankur@gandhi.dev" },
-            { label: "Location", value: "India" },
-            { label: "LinkedIn", value: "linkedin.com/in/ankurgandhi" },
-            { label: "GitHub", value: "github.com/ankurgandhi" },
+            { label: "Email", value: "ankurgandhi8789@gmail.com" },
+            { label: "Location", value: "Ghaziabad,India" },
+            { label: "LinkedIn", value: "www.linkedin.com/in/ankur-gandhi-15a978297/" },
+            { label: "GitHub", value: "github.com/ankurgandhi8789" },
           ].map((item) => (
             <div key={item.label}>
               <p
