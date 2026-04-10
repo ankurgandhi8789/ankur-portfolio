@@ -34,10 +34,10 @@ export const allProjects = [
     tag: "Frontend",
     stack: ["React"],
     desc: "A personal portfolio website built using React to showcase my projects, skills, and experience. It features a responsive design, smooth navigation, and interactive UI components to provide a seamless user experience.",
-    github: "#",
-    demo: "#",
+    github: "https://github.com/ankurgandhi8789/ankur-portfolio",
+    demo: "https://ankur-portfolio-lake.vercel.app/",
     color: "#34d399",
-    year: "2023",
+    year: "2026",
   },
   {
   title: "React Router Project",
