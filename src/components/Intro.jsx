@@ -85,7 +85,7 @@ const Intro = () => {
           </h1>
 
           {/* Animated Role */}
-          <p
+          {/* <p
             style={{
               fontSize: "clamp(16px, 2vw, 20px)",
               color: "#D4A017",
@@ -97,7 +97,7 @@ const Intro = () => {
             }}
           >
             {roles[roleIndex]}
-          </p>
+          </p> */}
 
           {/* Description */}
           <p
@@ -109,9 +109,7 @@ const Intro = () => {
               margin: "0 auto 10px",
             }}
           >
-            I build clean, scalable, and high-performance web applications.
-            Focused on crafting smooth user experiences with modern technologies
-            and thoughtful design.
+            I build clean, scalable, high-performance web applications. Skilled in problem solving, full-stack development, UI design, and backend systems, I create smooth user experiences using modern technologies and practical, adaptable solutions.
           </p>
 
           {/* CTA Buttons */}

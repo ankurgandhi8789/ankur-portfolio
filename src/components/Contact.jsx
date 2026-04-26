@@ -128,29 +128,29 @@ const Contact = () => {
         {/* LEFT — SIMPLE INFO */}
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           {[
-            { label: "Email", value: "ankurgandhi8789@gmail.com" },
-            { label: "Location", value: "Ghaziabad,India" },
-            { label: "LinkedIn", value: "www.linkedin.com/in/ankur-gandhi-15a978297/" },
-            { label: "GitHub", value: "github.com/ankurgandhi8789" },
+            { label: "Email", value: "ankurgandhi8789@gmail.com", href: "mailto:ankurgandhi8789@gmail.com" },
+            { label: "Location", value: "Ghaziabad, India", href: null },
+            { label: "LinkedIn", value: "linkedin.com/in/ankur-gandhi-15a978297", href: "https://www.linkedin.com/in/ankur-gandhi-15a978297/" },
+            { label: "GitHub", value: "github.com/ankurgandhi8789", href: "https://github.com/ankurgandhi8789" },
           ].map((item) => (
             <div key={item.label}>
-              <p
-                style={{
-                  fontSize: 11,
-                  color: "#9CA3AF",
-                  marginBottom: 4,
-                }}
-              >
+              <p style={{ fontSize: 11, color: "#9CA3AF", marginBottom: 4 }}>
                 {item.label}
               </p>
-              <p
-                style={{
-                  fontSize: 14,
-                  color: "#E5E5E5",
-                }}
-              >
-                {item.value}
-              </p>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  target={item.label !== "Email" ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  style={{ fontSize: 14, color: "#E5E5E5", textDecoration: "none" }}
+                  onMouseEnter={(e) => e.currentTarget.style.textDecoration = "underline"}
+                  onMouseLeave={(e) => e.currentTarget.style.textDecoration = "none"}
+                >
+                  {item.value}
+                </a>
+              ) : (
+                <p style={{ fontSize: 14, color: "#E5E5E5" }}>{item.value}</p>
+              )}
             </div>
           ))}
         </div>

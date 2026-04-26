@@ -128,7 +128,7 @@ const Footer = () => (
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <p style={{ fontSize: 13, color: "#E5E5E5" }}>ankurgandhi8789@gmail.com</p>
+              <a href="mailto:ankurgandhi8789@gmail.com" style={{ fontSize: 13, color: "#E5E5E5", textDecoration: "none" }} onMouseEnter={(e) => e.currentTarget.style.textDecoration = "underline"} onMouseLeave={(e) => e.currentTarget.style.textDecoration = "none"}>ankurgandhi8789@gmail.com</a>
               <p style={{ fontSize: 13, color: "#9CA3AF" }}>India</p>
             </div>
           </div>
@@ -136,21 +136,22 @@ const Footer = () => (
         </div>
 
         {/* BOTTOM */}
-        <div style={{
+        <div className="text-center"  style={{
           borderTop: "1px solid rgba(255,255,255,0.06)",
           paddingTop: 20,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
-          gap: 16
+          gap: 16,
+
         }}>
           <p style={{ fontSize: 12, color: "#9CA3AF" }}>
             © {new Date().getFullYear()} Ankur Gandhi
           </p>
 
           {/* SOCIALS */}
-          <div style={{ display: "flex", gap: 10 }}>
+          {/* <div style={{ display: "flex", gap: 10 }}>
             {socials.map((s) => (
               <a
                 key={s.name}
@@ -182,7 +183,7 @@ const Footer = () => (
                 {s.icon}
               </a>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
