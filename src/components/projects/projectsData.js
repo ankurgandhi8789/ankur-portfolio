@@ -9,16 +9,26 @@ export const allProjects = [
     color: "#a78bfa",
     year: "2026",
     },
-    {
-    title: "E-Waste Management System",
-    tag: "Frontend Project",
-    stack: ["HTML", "CSS", "JavaScript"],
-    desc: "An E-Waste Management System developed as my first project during 2nd year. It focuses on spreading awareness about proper disposal of electronic waste and provides a simple interface for users to understand recycling methods and environmental impact.",
-    github: "https://github.com/ankurgandhi8789/e-waste-management",
-    demo: "https://ankurgandhi8789.github.io/Waste-Management/",
-    color: "#34d399",
-    year: "2024",
-  },
+  {
+  title: "Thakur Shop Complaint Portal",
+  tag: "Full Stack MERN Project",
+  stack: ["MongoDB", "Express.js", "React.js", "Node.js"],
+  desc: "A complaint portal developed for electric and electronics shops where customers can submit complaints by filling in their details and issue information. Mechanics receive the complaint, visit the customer’s location, and solve the problem efficiently through the platform.",
+  github: "https://github.com/ankurgandhi8789/ThakurShopFrontend",
+  demo: "https://thakur-shop.vercel.app/",
+  color: "#34d399",
+  year: "2024",
+},
+{
+  title: "AI Consultancy Chatbot",
+  tag: "GenAI Project",
+  stack: ["GenAI", "React.js"],
+  desc: "An AI-powered chatbot developed for MS Consultancy Services to communicate with clients and answer their queries efficiently. The chatbot provides quick responses, improves client interaction, and helps users get consultancy-related information in an easy and interactive way.",
+  github: "https://github.com/ankurgandhi8789/ask-question-client",
+  demo: "https://ask-question-client.vercel.app/",
+  color: "#60a5fa",
+  year: "2025",
+},
   {
     title: "Employee Task Management System",
     tag: "Full Stack",
@@ -49,6 +59,16 @@ export const allProjects = [
   color: "#60a5fa",
   year: "2024",
 },
+  {
+    title: "E-Waste Management System",
+    tag: "Frontend Project",
+    stack: ["HTML", "CSS", "JavaScript"],
+    desc: "An E-Waste Management System developed as my first project during 2nd year. It focuses on spreading awareness about proper disposal of electronic waste and provides a simple interface for users to understand recycling methods and environmental impact.",
+    github: "https://github.com/ankurgandhi8789/e-waste-management",
+    demo: "https://ankurgandhi8789.github.io/Waste-Management/",
+    color: "#34d399",
+    year: "2024",
+  },
 ];
 
 // First 4 shown on main timeline

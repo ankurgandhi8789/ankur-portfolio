@@ -130,7 +130,7 @@ const Contact = () => {
           {[
             { label: "Email", value: "ankurgandhi8789@gmail.com", href: "mailto:ankurgandhi8789@gmail.com" },
             { label: "Location", value: "Ghaziabad, India", href: null },
-            { label: "LinkedIn", value: "linkedin.com/in/ankur-gandhi-15a978297", href: "https://www.linkedin.com/in/ankur-gandhi-15a978297/" },
+            { label: "LinkedIn", value: "linkedin.com/in/ankurgandhi8789", href: "https://www.linkedin.com/in/ankurgandhi8789/" },
             { label: "GitHub", value: "github.com/ankurgandhi8789", href: "https://github.com/ankurgandhi8789" },
           ].map((item) => (
             <div key={item.label}>

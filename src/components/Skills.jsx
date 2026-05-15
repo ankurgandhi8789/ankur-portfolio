@@ -9,8 +9,7 @@ const categories = [
       { name: "Next.js", icon: "▲" },
       { name: "JavaScript", icon: "JS" },
       { name: "Tailwind", icon: "🌊" },
-      { name: "Framer Motion", icon: "🎞️" },
-      { name: "Vue", icon: "💚" },
+      
       { name: "HTML", icon: "🧱" },
       { name: "CSS", icon: "🎨" },
     ],
@@ -23,10 +22,8 @@ const categories = [
       { name: "Express", icon: "🚂" },
       { name: "PostgreSQL", icon: "🐘" },
       { name: "MongoDB", icon: "🍃" },
-      { name: "Redis", icon: "🔴" },
       { name: "REST", icon: "🔗" },
-      { name: "GraphQL", icon: "◈" },
-      { name: "Firebase", icon: "🔥" },
+      
     ],
   },
   {
@@ -37,8 +34,6 @@ const categories = [
       { name: "Docker", icon: "🐳" },
       { name: "AWS", icon: "☁️" },
       { name: "Vercel", icon: "▲" },
-      { name: "Figma", icon: "🖌️" },
-      { name: "Linux", icon: "🐧" },
       { name: "VS Code", icon: "💙" },
       { name: "Postman", icon: "📮" },
     ],
